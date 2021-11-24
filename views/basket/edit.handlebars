@@ -1,17 +1,22 @@
+<a href="/">Back to all baskets</a>
 
 <h2>Update basket</h2>
 
-<form action="/basket/update/{{id}}" method="post">
+<form action="/basket/update/{{basket.id}}" method="post">
 
 	<div class="m1">
 		<label for="basket_name" class="w-7">Basket name</label>
-		<input type="text" name="basket_name" class="mt-1 p-1" readonly value="basket name" >
+		<strong>{{basket.description}}</strong>
+		{{!-- <input type="text" name="basket_name" class="mt-1 p-1" readonly value="" > --}}
 	</div>
 
 	<div class="m1">
 		<label for="qty" class="w-7" >Fruit</label>
 		<select name="fruit_id" class="mt-1 p-1" id="">
 			<option value="">Select fruit type</option>
+			{{#each fruits}}
+				<option value="{{id}}">{{name}} @ R{{price}}</option>
+			{{/each}}
 		</select>
 	</div>
 
@@ -28,17 +33,22 @@
 
 	<h3>Fruits in basket</h3>
 
+	<div class="mb-1">
+		<strong>Total cost:</strong> <span>R{{totalCost}}</span>
+	</div>
+
 	<table>
 		<tr>
 			<th>Fruit</th>
 			<th>Qty</th>
 			<th>Total cost</th>
 		</tr>
-		{{#each fruits}}
+
+		{{#each basketItems}}
 		<tr>
-			<d>{{fruit_name}}</d>
-			<d>{{qty}}</d>
-			<d>{{total_cost}}</d>
+			<td>{{name}}</td>
+			<td>{{qty}}</td>
+			<td>R{{total_price}}</td>
 		</tr>
 		{{/each}}
 	</table>

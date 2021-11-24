@@ -2,12 +2,15 @@ const assert = require("assert");
 const FruitBasket = require("../fruit-basket-service");
 const pg = require("pg");
 const Pool = pg.Pool;
-require('dotenv').config()
+// require('dotenv').config()
 
-const connectionString = process.env.DATABASE_URL  // your database URL here
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/fruit_basket_app_test';
 
 const pool = new Pool({
-    connectionString
+    connectionString,
+	ssl : {
+		rejectUnauthorized:false
+	}
 });
 
 describe("The fruit basket service", function() {
